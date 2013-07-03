@@ -14,7 +14,13 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  if a == b && b == c
+  if a == 0 || b == 0 || c == 0
+  	raise TriangleError.new("all sides must have non-zero length")
+  elsif a < 0 || b < 0 || c < 0
+  	raise TriangleError.new("all sides must have positive length")
+  elsif [a, b, c].sort[0..1].reduce{|s1, s2| s1 + s2} <= [a, b, c].max
+  	raise TriangleError.new("the two shortest sides must have a combined length greater than the longest side")
+  elsif a == b && b == c
   	return :equilateral
   elsif a != b && b != c && a != c
   	return :scalene
